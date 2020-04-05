@@ -1,0 +1,23 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t shadgun/react-test -f ./client/Dockerfile.dev
+
+script:
+  - docker run shadgun/react-test npm test -- --coverage
+
+after_succes:
+  - docker build -t shadgun/multi-client ./client
+  - docker build -t shadgun/multi-nginx ./nginx
+  - docker build -t shadgun/multi-server ./server
+  - docker build -t shadgun/multi-worker ./worker
+  #Log in to docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password--stdin
+  #Take those images and push them to docker hub
+  - docker push shadgun/multi-client
+  - docker push shadgun/multi-nginx
+  - docker push shadgun/multi-server
+  - docker push shadgun/multi-worker
+  
