@@ -9,7 +9,7 @@ before_install:
 script:
   - docker run -e CI=true shadgun20/react-test npm test -- --coverage
 
-after_succes:
+after_success:
   - docker build -t shadgun20/multi-client ./client
   - docker build -t shadgun20/multi-nginx ./nginx
   - docker build -t shadgun20/multi-server ./server
