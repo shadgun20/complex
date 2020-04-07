@@ -21,4 +21,16 @@ after_success:
   - docker push shadgun20/multi-server
   - docker push shadgun20/multi-worker
   - docker push shadgun20/multi-client
-  
+
+deploy:
+  edge: true
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: multi-docker
+  env: MultiDocker-env
+  bucket_name: elasticbeanstalk-us-east-2-276554742618
+  bucket_path: docker-multi
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
