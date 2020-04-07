@@ -17,10 +17,10 @@ after_success:
   #Log in to docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   #Take those images and push them to docker hub
-  - docker push shadgun20/multi-nginx
-  - docker push shadgun20/multi-server
-  - docker push shadgun20/multi-worker
-  - docker push shadgun20/multi-client
+  - docker push shadgun20/multi-nginx:master
+  - docker push shadgun20/multi-server:master
+  - docker push shadgun20/multi-worker:master
+  - docker push shadgun20/multi-client:master
 
 deploy:
   edge: true
